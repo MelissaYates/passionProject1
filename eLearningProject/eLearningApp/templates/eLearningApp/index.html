@@ -1,0 +1,39 @@
+{% extends 'eLearningApp/base.html' %}
+
+{% block content %}
+<form method="get" action="{%url 'search'%} " > <input type="search" name="q" placeholder="search"> <input type="submit" value="Search">  </form>
+<h2>Courses:</h2>
+{% if user.is_authenticated %}
+<h4>Welcome {{user.username}}</h4>
+<a href="{% url 'landing' %}"><button>{{user.username}} Course Page </button></a>
+<a href="{% url 'logOut' %}"><button>Log Out</button></a>
+
+
+<div id="post_loggedIn">
+    {% for each in item %}
+    <p><a href="{% url 'display' each.id %}">{{ each.entryName }}</a></p>
+    <p>{{ each.info }}</p>
+    <p>{{ each.created }}</p>
+    <p>{% if each.thumbnail %}<img src="{{each.thumbnail.url}}" width="200" height="200">{% endif %}</p>
+    {# <a href="{% url 'edit' each.id %}">Edit Item</a> #}
+    {# <a href="{% url 'delete' each.id %}">Delete Item</a> #}
+    {% endfor %}
+</div>
+
+
+
+{% else %}
+<a href="{% url 'signUp' %}" id="btn1"><button>Sign Up </button></a>
+<a href="{% url 'logIn' %}" id="btn2"><button>Log In </button></a>
+
+<div id="post_notLogged">
+    {% for each in item %}
+    <li><a href="">{{ each.owner }}</a></li>
+    <li>{{ each.info }}</li>
+    <li>{{ each.created }}</li>
+    <li>{% if each.thumbnail %}<img src="{{each.thumbnail.url}}" width="200" height="200">{% endif %}</li>
+    {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}
