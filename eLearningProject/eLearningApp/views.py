@@ -119,7 +119,7 @@ def related_course(request, pkToRelated):
         context = {
             'form': RelatedCourseForm()
         }
-    return render(request, 'eLearningApp/related_post.html', context)
+    return render(request, 'eLearningApp/related_course.html', context)
 
 def search(request):
     if request.method == "GET":

@@ -1,0 +1,24 @@
+{% extends 'eLearningApp/base.html' %}
+
+{% block content %}
+
+
+{% if userForeignKey == user.username %}
+<h1>In the Edit Page</h1>
+<form method='POST' enctype="multipart/form-data">
+    {{ form.as_p }}
+    <button type="submit">Save Item</button>
+    {% csrf_token %}
+</form>
+<br/><a href="{% url 'delete' item.id %}"><button>Delete Item</button> </a>
+<a href="{% url 'related' item.id %}"><button>Add Related Item</button></a>
+
+{% else %}
+<h2>{{user.username}} is not able to edit another user's post!</h2>
+<h4>You are able to edit and delete your own post(s).</h4>
+
+{% endif %}
+
+<br/><a href="{% url 'index' %}"><button>Go Home</button></a>
+<a href="{% url 'landing' %}"><button>{{user.username}} Course Page </button></a>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'eLearning/base.html' %}
+{% block content %}
+
+<h1>Post Course</h1>
+{% if user.is_authenticated %}
+<ul>
+    <li>{{item.title}}</li>
+    <li>{{item.info}}</li>
+    <li>{{item.created}}</li>
+    <li>{{item.thumbnail}}</li>
+</ul>
+{# add links to edit or delete #}
+<a href="{% url 'edit' item.id %}"><button>Edit Item</button></a>
+
+<br/><a href="{% url 'index' %}"><button>Go Home</button></a>
+
+{% else %}
+<ul>
+    <li>{{item.title}}</li>
+    <li>{{item.info}}</li>
+    <li>{{item.created}}</li>
+    <li>{{item.thumbnail}}</li>
+</ul>
+<a href="{% url 'edit' item.id %}"><button>Edit Item</button></a>
+<br/><a href="{% url 'index' %}"><button>Go Home</button></a>
+{% endif %}
+
+
+
+
+{% endblock %}

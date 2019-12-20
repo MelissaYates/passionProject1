@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'eLearningApp/base.html' %}
 
-</body>
-</html>
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h4>Welcome {{user.username}}</h4>
+<a href="{% url 'index' %}"><button>Home</button></a>
+<a href="{% url 'logOut' %}"><button>Log Out</button></a>
+<h2>Create New Course:</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>Submit</button>
+</form>
+<br>
+
+<h2>Your Courses:</h2>
+{% for entry in myEntries %}
+
+<p><a href="{% url 'display' entry.id %}">{{entry.entryName}}</a></p>
+<p>{{entry.entryInfo}}</p>
+<p>{{entry.entryDate}}</p>
+<p>{% if entry.docFile %}<img src="{{entry.image.url}}" width="200" height="200">{% endif %}</p>
+<a href="{% url 'edit' entry.id %}">Edit Item</a>
+<a href="{% url 'delete' entry.id %}">Delete Item</a>
+{% endfor %}
+
+
+
+
+
+{% else %}
+<a href="{% url 'logIn' %}" id="btn2"><button>Log in</button></a>
+
+{% endif %}
+
+{% endblock %}
