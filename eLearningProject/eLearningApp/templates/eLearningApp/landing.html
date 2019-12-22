@@ -8,11 +8,25 @@
 <a href="{% url 'index' %}"><button>Home</button></a>
 <a href="{% url 'logOut' %}"><button>Log Out</button></a>
 <h2>Create New Course:</h2>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>Submit</button>
-</form>
+<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Record Delete Confirmation ?</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button>Submit</button>
+                </form>
+                <div style="clear:both"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
 <br>
 
 <h2>Your Courses:</h2>
@@ -21,9 +35,10 @@
 <p><a href="{% url 'display' entry.id %}">{{entry.entryName}}</a></p>
 <p>{{entry.entryInfo}}</p>
 <p>{{entry.entryDate}}</p>
-<p>{% if entry.docFile %}<img src="{{entry.image.url}}" width="200" height="200">{% endif %}</p>
-<a href="{% url 'edit' entry.id %}">Edit Item</a>
-<a href="{% url 'delete' entry.id %}">Delete Item</a>
+<p>{% if entry.image %}<img src="{{entry.image.url}}" width="200" height="200">{% endif %}</p>
+<button class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i><a href="{% url 'edit' entry.id %}">Edit Item</a></button>
+<button class="btn btn-danger" type="button" ><a href="{% 'delete' entry.id %}">Delete Item</a></button>
+<button class="btn btn-success" type="button" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button>
 {% endfor %}
 
 

@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
+from urllib3.util import request
+
 from .forms import UserForm, ExistingUserForm, RelatedCourseForm, CourseForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .models import Subject, Course, RelatedCourse, Module, Content, ItemBase
+from .models import Subject, Course, RelatedCourse, Module, Content, ItemBase, Chat
+
 # Create your views here.
 #  the index view is the main page that the user sees with all of the entries
 def index(request):
@@ -32,7 +35,7 @@ def landing(request):
             entry.save()
             return redirect('landing')
         image_list = Course.objects.all()
-        myEntries = Course.objects.filter(foreignKey=request.user)
+        myEntries = Course.objects.filter(owner=request.user)
         context = {
             'form': CourseForm,
             'myEntries': myEntries,
@@ -135,4 +138,5 @@ def display(request, pkToShow):
         'item': item,
     }
     return render(request, 'eLearningApp/display.html', displayInfo)
+
 

@@ -14,6 +14,8 @@ urlpatterns = [
     path('signUp/', views.signUp, name='signUp'),
     path('search/', views.search, name='search'),
     path('display/<int:pkToShow>', views.display, name='display'),
+
+
 ]
 
 if settings.DEBUG:
