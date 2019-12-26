@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
-from urllib3.util import request
-
 from .forms import UserForm, ExistingUserForm, RelatedCourseForm, CourseForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .models import Subject, Course, RelatedCourse, Module, Content, ItemBase, Chat
+from .models import Subject, Course, RelatedCourse, Module, Content, ItemBase
 
 # Create your views here.
 #  the index view is the main page that the user sees with all of the entries

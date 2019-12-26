@@ -80,7 +80,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{% 'index' %}">Home</a></li>
+                <li><a href="{% url 'index' %}">Home</a></li>
                 {% if user.is_authenticated %}
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Account <i class="fa fa-angle-down"></i>
@@ -102,36 +102,14 @@
 </header>
 <!--header end-->
 {% block content %} {% endblock content %}
-<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Record Delete Confirmation ?</h4>
-            </div>
-            <div class="modal-body">
-                <form role="form" class="form-inline">
-                    <div class="form-group">
-                        Do you want to delete the record ?
-                    </div>
-                    <div class="rows" style="float:right; margin-top:15px;">
-                        <button class="btn btn-danger" type="button" onClick="{% delete()">Delete</button>
-                        <button class="btn btn-success" type="button" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button>
-                    </div>
-                </form>
-                <div style="clear:both"></div>
-            </div>
 
-        </div>
-    </div>
-</div>
 <!--footer start-->
 <footer class="footer">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-sm-3 address wow fadeInUp" data-wow-duration="2s" data-wow-delay=".1s">
                 <h1>
-                    contact info
+                    Contact Information
                 </h1>
                 <address>
                     <p><i class="fa fa-home pr-10"></i>Address: No.XXXXXX street</p>
@@ -140,33 +118,6 @@
                     <p><i class="fa fa-phone pr-10"></i>Phone : (123) 456-7890 </p>
                     <p><i class="fa fa-envelope pr-10"></i>Email : <a href="javascript:;">support@example.com</a></p>
                 </address>
-            </div>
-            <div class="col-lg-3 col-sm-3">
-                <div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
-                    <h1>Modules</h1>
-                    <ul class="page-footer-list">
-                        <li>
-                            <i class="fa fa-angle-right"></i>
-                            <a href="#">Question Module</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-angle-right"></i>
-                            <a href="#">User Module</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-angle-right"></i>
-                            <a href="#">Tutor Module</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-angle-right"></i>
-                            <a href="#">Login Module</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-angle-right"></i>
-                            <a href="#">Quiz Module</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
             <div class="col-lg-3 col-sm-3">
                 <div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
@@ -186,27 +137,12 @@
                         </li>
                         <li>
                             <i class="fa fa-angle-right"></i>
-                            <a href="/users">Login</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-angle-right"></i>
                             <a href="/pages/contact">Email Us</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-3">
-                <div class="text-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".7s">
-                    <h1>
-                        About Project
-                    </h1>
-                    <p>
-                        Most online quizzes are to be taken lightly. The results do not often reflect the true personality or relationship. They are also rarely psychometrically valid. However, they may occasion reflection on the subject of the quiz and provide a springboard for a person to explore his or her emotions, beliefs, or actions.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </footer>
 <!-- footer end -->
 <!--small footer start -->
@@ -215,7 +151,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="copyright">
-                    <p>&copy; Copyright Online E-Learning Portal System.</p>
+                    <p>&copy; Melissa Yates.</p>
                 </div>
             </div>
         </div>
@@ -309,6 +245,6 @@
     );
 </script>
 </body>
-<p>&Copy Melissa Yates</p>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>

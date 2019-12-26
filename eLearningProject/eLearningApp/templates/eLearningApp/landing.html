@@ -37,7 +37,7 @@
 <p>{{entry.entryDate}}</p>
 <p>{% if entry.image %}<img src="{{entry.image.url}}" width="200" height="200">{% endif %}</p>
 <button class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i><a href="{% url 'edit' entry.id %}">Edit Item</a></button>
-<button class="btn btn-danger" type="button" ><a href="{% 'delete' entry.id %}">Delete Item</a></button>
+<button class="btn btn-danger" type="button" ><a href="{% url 'delete' entry.id %}">Delete Item</a></button>
 <button class="btn btn-success" type="button" class="close" data-dismiss="modal" aria-hidden="true">Cancel</button>
 {% endfor %}
 
