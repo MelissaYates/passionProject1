@@ -1,8 +1,20 @@
 
 from django.contrib.auth.models import User
 from rest_framework import serializers
+# from .models import Chat, Users
 from .models import Message
 
+
+# class UsersSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Users
+#         fields = ('user_id', 'last_visit')
+#
+#
+# class ChatSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Chat
+#         fields = ('sender', 'receiver','msg','time')
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)

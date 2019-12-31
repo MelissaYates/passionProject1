@@ -1,4 +1,3 @@
-
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.http.response import JsonResponse, HttpResponse
@@ -7,6 +6,72 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from .models import Message, UserProfile
 from .serializers import MessageSerializer, UserSerializer
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+# from .serializers import UsersSerializer,ChatSerializer
+# from .models import Users, Chat
+from django.shortcuts import render
+import datetime
+from django.utils import timezone
+from django.db.models import Q
+
+
+def index(request):
+    return render(request, 'chatApp/index.html')
+
+
+# # @api_view(['POST'])
+# def view_users(request):
+#     if request.method == 'POST':
+#         user, created = Users.objects.update_or_create(
+#             user_id=request.data['sender'],
+#             defaults={
+#                 'last_visit': datetime.datetime.now(tz=timezone.utc)
+#             })
+#
+#         time=datetime.datetime.now(tz=timezone.utc) - datetime.timedelta(seconds=15)
+#         data={
+#             'status': 'true',
+#             'data': UsersSerializer(Users.objects.filter(last_visit__gte=time), many=True).data
+#         }
+#         return Response(data, status=status.HTTP_200_OK)
+#
+#
+# # @api_view(['POST'])
+# def save_msg(request):
+#     if request.method == 'POST':
+#         time=datetime.datetime.now(tz=timezone.utc)
+#         chat = Chat(
+#             sender=request.data['sender'],
+#             receiver=request.data['receiver'],
+#             msg=request.data['msg'],
+#             time=time
+#         )
+#         chat.save();
+#         data={
+#             'status': 'true'
+#         }
+#         return Response(data, status=status.HTTP_200_OK)
+#
+# # @api_view(['POST'])
+# def get_chat(request):
+#     if request.method == 'POST':
+#         time=datetime.datetime.now(tz=timezone.utc)- datetime.timedelta(seconds=150)
+#         data={
+#             'status': 'true',
+#             'data': ChatSerializer(Chat.objects.filter(time__gte=time,receiver=request.data['sender']), many=True).data
+#         }
+#         return Response(data, status=status.HTTP_200_OK)
+#
+# # @api_view(['POST'])
+# def view_msg(request):
+#     if request.method == 'POST':
+#         data={
+#             'status': 'true',
+#             'data': ChatSerializer(Chat.objects.filter(Q(receiver=request.data['sender'],sender=request.data['receiver']) | Q(receiver=request.data['receiver'],sender=request.data['sender'])), many=True).data
+#         }
+#         return Response(data, status=status.HTTP_200_OK)
 
 
 def index(request):
@@ -76,15 +141,14 @@ def register_view(request):
     """
     if request.user.is_authenticated:
         return redirect('chats')
-    return render(request, 'chat/register.html', {})
+    return render(request, 'chatApp/register.html', {})
 
 
 def chat_view(request):
     if not request.user.is_authenticated:
         return redirect('index')
     if request.method == "GET":
-        return render(request, 'chatApp/chat.html',
-                      {'users': User.objects.exclude(username=request.user.username)})
+        return render(request, 'chatApp/chat.html', {'users': User.objects.exclude(username=request.user.username)})
 
 
 def message_view(request, sender, receiver):
@@ -94,5 +158,4 @@ def message_view(request, sender, receiver):
         return render(request, "chatApp/messages.html",
                       {'users': User.objects.exclude(username=request.user.username),
                        'receiver': User.objects.get(id=receiver),
-                       'messages': Message.objects.filter(sender_id=sender, receiver_id=receiver) |
-                                   Message.objects.filter(sender_id=receiver, receiver_id=sender)})
+                       'messages': Message.objects.filter(sender_id=sender, receiver_id=receiver) | Message.objects.filter(sender_id=receiver, receiver_id=sender)})

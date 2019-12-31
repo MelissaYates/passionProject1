@@ -5,7 +5,15 @@ import datetime
 
 from django.core.cache import cache
 
-
+# class Chat(models.Model):
+#     sender = models.CharField(max_length=256)
+#     receiver = models.CharField(max_length=256)
+#     msg = models.TextField()
+#     time = models.DateTimeField(auto_now_add=True)
+#
+# class Users(models.Model):
+#     user_id = models.CharField(max_length=256)
+#     last_visit = models.DateTimeField(auto_now_add=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

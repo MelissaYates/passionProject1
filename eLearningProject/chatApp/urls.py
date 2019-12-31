@@ -13,4 +13,9 @@ urlpatterns = [
     path('api/users', views.user_list, name='user-list'),
     path('logout', LogoutView.as_view(next_page='index'), name='logout'),
     path('register', views.register_view, name='register'),
+    # path('view_users/', views.view_users, name='view_users'),
+    # path('save_msg/', views.save_msg, name='save_msg'),
+    # path('get_chat/', views.get_chat, name='get_chat'),
+    # path('view_msg/', views.view_msg, name='view_msg'),
+
 ]
