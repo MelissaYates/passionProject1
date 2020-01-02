@@ -14,7 +14,7 @@ def index(request):
     }
     return render(request, "eLearningApp/index.html", context)
 
-def landing(request):
+def dashboard(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             # print(request.POST)
@@ -104,7 +104,6 @@ def signUp(request):
         return render(request, 'eLearningApp/signUp.html', context)
 
 def related_course(request, pkToRelated):
-    item = Course.objects.get(pk=pkToRelated)
     if request.method == "POST":
         form = RelatedCourseForm(request.POST)
         if form.is_valid():
@@ -113,8 +112,9 @@ def related_course(request, pkToRelated):
                 tempFiles = ''
             else:
                 tempFiles = tempFiles["image"]
-            related = RelatedCourse(entryName=request.POST['entryName'], entryInfo=request.POST['entryInfo'], image=tempFiles, relatedKey=item)
-            related.save()
+                related = RelatedCourse.objects.select_related('article').prefetch_related('tags').only(
+                'title', 'created_on', 'author__username', 'related_image', 'tags__name')
+                related.save()
         return redirect("landing")
     else:
         context = {
@@ -138,3 +138,5 @@ def display(request, pkToShow):
     return render(request, 'eLearningApp/display.html', displayInfo)
 
 
+def practitioner_details():
+    return None
