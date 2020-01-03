@@ -32,7 +32,7 @@ def dashboard(request):
             entry = Course(title=request.POST['title'], info=request.POST['info'], docFile=tempFile,
                            foreignKey=request.user)
             entry.save()
-            return redirect('landing')
+            return redirect('dashboard')
         image_list = Course.objects.all()
         myEntries = Course.objects.filter(owner=request.user, created_date_lte=timezone.now()).order_by('-created_date')
         context = {
@@ -65,7 +65,7 @@ def delete(request, pkToDelete):
     item = get_object_or_404(Course, pk=pkToDelete)
     course_pk = item.post.pk
     item.delete()
-    return redirect('landing', pk=course_pk)
+    return redirect('dashboard', pk=course_pk)
 
 
 def logIn(request):
@@ -115,10 +115,10 @@ def related_course(request, pkToRelated):
                 tempFiles = ''
             else:
                 tempFiles = tempFiles["image"]
-                related = RelatedCourse.objects.select_related('article').prefetch_related('tags').only(
-                'title', 'created_on', 'author__username', 'related_image', 'tags__name')
+                related = RelatedCourse.objects.select_related('entryName').prefetch_related('time').only(
+                'entryInfo', 'created_on', 'image')
                 related.save()
-        return redirect("landing")
+        return redirect("dashboard")
     else:
         context = {
             'form': RelatedCourseForm()

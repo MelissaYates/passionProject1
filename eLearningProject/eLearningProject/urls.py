@@ -19,8 +19,8 @@ from django.contrib.auth import views
 
 urlpatterns = [
     path('', include('eLearningApp.urls')),
-    path('accounts/login/', views.login, name='login'),
-    path('accounts/logout/', views.logout, name='logout', kwargs={'next_page':'/'}),
+    # path('accounts/login/', views.login, name='login'),
+    # path('accounts/logout/', views.logout, name='logout', kwargs={'next_page':'/'}),
     path('admin/', admin.site.urls),
 
 ]

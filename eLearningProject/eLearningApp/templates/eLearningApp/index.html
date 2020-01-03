@@ -1,11 +1,10 @@
 {% extends 'eLearningApp/base.html' %}
 
 {% block content %}
-<form method="get" action="{%url 'search'%} " > <input type="search" name="q" placeholder="search"> <input type="submit" value="Search">  </form>
 <h2>Courses:</h2>
 {% if user.is_authenticated %}
 <h4>Welcome {{user.username}}</h4>
-<a href="{% url 'landing' %}"><button>{{user.username}} Course Page </button></a>
+<a href="{% url 'dashboard' %}"><button>{{user.username}} Course Page </button></a>
 <a href="{% url 'logOut' %}"><button>Log Out</button></a>
 
 

@@ -16,13 +16,13 @@ class CourseForm(ModelForm):
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ["username", "email", "password"]
+        fields = ["email", "password"]
 
 # form for user login/ authentication
 class ExistingUserForm(ModelForm):
     class Meta:
         model = User
-        fields = ["username", "password"]
+        fields = ["email", "password"]
 
 # form for related items
 class RelatedCourseForm(ModelForm):

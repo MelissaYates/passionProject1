@@ -23,10 +23,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.0/flexslider.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
-    <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="/assets/css/jquery-ui.css">
-    <link href="superfish.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/superfish/1.7.10/css/superfish.min.css" rel="stylesheet" media="screen">
     <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 
 
@@ -45,12 +45,12 @@
     <script src="/static/additional-methods.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/static/js/hover-dropdown.js"></script>
-    <script src="/static/owlcarousel/owl.carousel.js"></script>
+    <script src="/static/js/owl.carousel.js"></script>
     <script type="text/javascript" src="/static/bxslider/jquery.bxslider.js"></script>
-    <script defer src="/static/js/jquery.flexslider.js"></script>
+    <script defer src="eLearningApp/static/js/jquery.flexslider.js"></script>
     <script src="/static/js/jquery.easing.min.js"></script>
     <script src="/static/js/link-hover.js"></script>
-    <script type="text/javascript" src="/static/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 
     <!--common script for all pages-->
@@ -62,48 +62,57 @@
 <body>
 <!--header start-->
 <header class="head-section">
-    <div class="navbar navbar-default navbar-static-top container">
-        <div class="navbar-header">
-            <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Online E-Learning Portal</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{% url 'index' %}">Home</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Online E-Learning Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
                 {% if user.is_authenticated %}
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Account <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'index' %}">Courses</a></li>
-                        <li><a href="{% url 'landing' %}">Add Course</a></li>
+                        <li><a href="{% url 'dashboard' %}">Add Course</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Chat</a></li>
                 <li><a href="{% url 'logOut' %}">Logout</a></li>
                 {% else %}
                 <li><a href="{% url 'logIn' %}">Login</a></li>
 
                 {% endif %}
+
             </ul>
+            <form method="get" action="{%url 'search'%}" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
         </div>
-    </div>
+    </nav>
 </header>
 <!--header end-->
 {% block content %} {% endblock content %}
 
-<!--footer start-->
-<footer class="footer">
-    <div class="container">
+<!-- Footer -->
+<footer class="page-footer font-small blue pt-4">
+
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
+
+        <!-- Grid row -->
         <div class="row">
-            <div class="col-lg-3 col-sm-3 address wow fadeInUp" data-wow-duration="2s" data-wow-delay=".1s">
-                <h1>
-                    Contact Information
-                </h1>
+
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
+
+                <!-- Content -->
+                <h5 class="text-uppercase">Contact Information</h5>
                 <address>
                     <p><i class="fa fa-home pr-10"></i>Address: No.XXXXXX street</p>
                     <p><i class="fa fa-globe pr-10"></i>Mars city, Country </p>
@@ -111,27 +120,39 @@
                     <p><i class="fa fa-phone pr-10"></i>Phone : (123) 456-7890 </p>
                     <p><i class="fa fa-envelope pr-10"></i>Email : <a href="javascript:;">support@example.com</a></p>
                 </address>
-            </div>
-            <div class="col-lg-3 col-sm-3">
-                <div class="page-footer wow fadeInUp" data-wow-duration="2s" data-wow-delay=".5s">
 
-                    <ul class="page-footer-list">
-                        <li>
-                            <i class="fa fa-angle-right"></i>
-                            <a href="/">Home</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <div class="copyright">
-                        <p>&copy; Melissa Yates.</p>
-                    </div>
-                </div>
             </div>
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
+
+                <!-- Links -->
+                <h5 class="text-uppercase">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <i class="fa fa-angle-right"></i>
+                        <a href="/">Home</a>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
         </div>
+        <!-- Grid row -->
+
     </div>
+    <!-- Footer Links -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="https://mdbootstrap.com/education/bootstrap/"> Melissa Yates</a>
+    </div>
+    <!-- Copyright -->
+
 </footer>
-<!-- footer end -->
+<!-- Footer -->
 
 <script>
     wow = new WOW(
