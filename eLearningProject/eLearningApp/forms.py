@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm, Textarea
 from .models import Course, RelatedCourse, Subject, Module, User
 
@@ -8,7 +9,8 @@ class CourseForm(ModelForm):
     class Meta:
         model = Course
         exclude = ['foreignKey']
-        widgets = {'entryInfo': Textarea(attrs={'rows': 5, 'cols': 50})}
+        widgets = {'title': forms.TextInput(attrs={'class': 'textinputclass'}),
+                   'info': forms.Textarea(attrs={'class':'editable medium-editor-textarea coursecontent'})}
 
 #form for user to singup and create profile for future access
 class UserForm(ModelForm):
@@ -27,3 +29,7 @@ class RelatedCourseForm(ModelForm):
     class Meta:
         model = RelatedCourse
         fields = ["entryName", "entryInfo", "image"]
+        widgets={
+            'entryName':  forms.TextInput(attrs={'class': 'textinputclass'}),
+            'entryInfo': forms.Textarea(attrs={'class': 'editable medium-editor-textarea'})
+        }

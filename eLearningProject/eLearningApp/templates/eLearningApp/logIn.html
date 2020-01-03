@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<div class = "jumbotron">
 <a href="{% url 'signUp' %}" id="btn1"><button>Sign Up </button></a>
 <a href="{% url 'logIn' %}" id="btn2"><button>Log in</button></a>
 <h1>
@@ -15,8 +16,9 @@
 <form action="{% url 'logIn' %}" method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <button>Submit</button>
+    <input type="submit" class="btn btn-primary" value="Login"/>
+    <input type="hidden" name="next" value="{{next}}"/>
 
 </form>
-
+</div>
 {% endblock %}

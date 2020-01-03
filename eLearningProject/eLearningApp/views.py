@@ -1,5 +1,6 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 from .forms import UserForm, ExistingUserForm, RelatedCourseForm, CourseForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -33,10 +34,11 @@ def dashboard(request):
             entry.save()
             return redirect('landing')
         image_list = Course.objects.all()
-        myEntries = Course.objects.filter(owner=request.user)
+        myEntries = Course.objects.filter(owner=request.user, created_date_lte=timezone.now()).order_by('-created_date')
         context = {
             'form': CourseForm,
             'myEntries': myEntries,
+            'image_list': image_list,
         }
         return render(request, 'eLearningApp/landing.html', context)
 
@@ -61,8 +63,9 @@ def edit(request, pkToEdit):
 
 def delete(request, pkToDelete):
     item = get_object_or_404(Course, pk=pkToDelete)
+    course_pk = item.post.pk
     item.delete()
-    return redirect('landing')
+    return redirect('landing', pk=course_pk)
 
 
 def logIn(request):
@@ -122,21 +125,26 @@ def related_course(request, pkToRelated):
         }
     return render(request, 'eLearningApp/related_course.html', context)
 
+
 def search(request):
     if request.method == "GET":
         query = request.GET.get('q')
-    context = {
-        'list': Course.objects.filter(entryName__contains=query)}
-    return render(request, 'eLearningApp/search.html', context)
+        context = {
+            'list': Course.objects.filter(entryName__contains=query)}
+        return render(request, 'eLearningApp/search.html', context)
 
 
-def display(request, pkToShow):
+def course_detail(request, pkToShow):
     item = Course.objects.get(pk=pkToShow)
     displayInfo = {
         'item': item,
     }
-    return render(request, 'eLearningApp/display.html', displayInfo)
+    return render(request, 'eLearningApp/course_detail.html', displayInfo)
 
 
-def practitioner_details():
-    return None
+def practitioner_details(request, pkToPerson):
+    person: User.objects.get(pk=pkToPerson)
+    person_details = {
+        'person': person,
+    }
+    return render(request, 'eLearningApp/person_detail.html', person_details)

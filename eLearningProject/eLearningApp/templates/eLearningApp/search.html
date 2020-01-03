@@ -1,4 +1,4 @@
 <h1>Search Results:</h1>
-{% for each in list%}
+{% for each in list %}
 <a href="{% url 'display' each.id%}">{{each.title}}</a>
 {%endfor%}

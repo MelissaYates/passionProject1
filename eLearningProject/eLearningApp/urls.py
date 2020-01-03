@@ -13,8 +13,8 @@ urlpatterns = [
     path('logOut/', views.logOut, name='logOut'),
     path('signUp/', views.signUp, name='signUp'),
     path('search/', views.search, name='search'),
-    path('display/<int:pkToShow>', views.display, name='display'),
-    path('practitioner_details/<int:pkToShow>', views.practitioner_details, name='practitioner_details'),
+    path('display/<int:pkToShow>', views.course_detail, name='display'),
+    path('practitioner_details/<int:pkToPerson>', views.practitioner_details, name='practitioner_details'),
 
 ]
 

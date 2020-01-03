@@ -79,7 +79,7 @@ class User(AbstractBaseUser):
         # The user is identified by their email address
         return self.email
 
-    def __str__(self):              # __unicode__ on Python 2
+    def __str__(self):
         return self.email
 
     def has_perm(self, perm, obj=None):
