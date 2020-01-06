@@ -64,7 +64,7 @@
 <!--header start-->
 <header class="head-section">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Online E-Learning Portal</a>
+        <a class="navbar-brand" href="/">Online E-Learning Portal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -74,23 +74,40 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
-                {% if user.is_authenticated %}
+                {% if request.session.user_level_id == 1 %}
+                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Administration <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'index' %}">Add Topics</a></li>
+                        <li><a href="/course/add">Add Course</a></li>
+                        <li><a href="/users/add">Add New User</a></li>
+                    </ul>
+                </li>
+                {% elif request.session.user_level_id == 2 %}
+                <li><a href="/users/dashboard">Dashboard</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Administration <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/course/list">Course Lists</a></li>
+                    </ul>
+                </li>
+                {% endif %}
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Account <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'index' %}">Courses</a></li>
-                        <li><a href="{% url 'dashboard' %}">Add Course</a></li>
+                        <li><a href="/users/update/{{ request.session.user_id }}/">My Account</a></li>
+                        <li><a href="/users/changepassword">Change Password</a></li>
                     </ul>
                 </li>
-                <li><a href="{% url 'logOut' %}">Logout</a></li>
-                {% else %}
-                <li><a href="{% url 'logIn' %}">Login</a></li>
+                <li><a href="{% url 'logIn' %}">Log In</a></li>
 
-                {% endif %}
 
             </ul>
-            <form method="get" action="{%url 'search'%}" class="form-inline my-2 my-lg-0">
+            <form method="get" action="{% url 'search' %}" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
@@ -99,6 +116,30 @@
 </header>
 <!--header end-->
 {% block content %} {% endblock content %}
+
+<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Record Delete Confirmation ?</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-inline">
+                    <div class="form-group">
+                        Do you want to delete the record ?
+                    </div>
+                    <div class="rows" style="float:right; margin-top:15px;">
+                        <button class="btn btn-danger" type="button" onClick="delete_record()">Delete</button>
+                        <button class="btn btn-success close" type="button" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                    </div>
+                </form>
+                <div style="clear:both"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 <!-- Footer -->
 <footer class="page-footer font-small blue pt-4">
@@ -162,7 +203,7 @@
             animateClass: 'animated', // default
             offset: 0          // default
         }
-    )
+    );
     wow.init();
 </script>
 

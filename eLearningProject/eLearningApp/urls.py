@@ -6,17 +6,15 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'),
     path('dashboard/', views.dashboard, name='dashboard'),
-    path('related_course/<int:pkToRelated>', views.related_course, name='related'),
-    path('edit/<int:pkToEdit>', views.edit, name='edit'),
-    path('delete/<int:pkToDelete>', views.delete, name='delete'),
+    path('edit/<int:userId>/', views.edit, name='edit'),
+    path('forgot/', views.forgot, name="forgot"),
     path('logIn/', views.logIn, name='logIn'),
     path('logOut/', views.logOut, name='logOut'),
     path('signUp/', views.signUp, name='signUp'),
     path('search/', views.search, name='search'),
-    path('display/<int:pkToShow>', views.course_detail, name='display'),
-    path('practitioner_details/<int:pkToPerson>', views.practitioner_details, name='practitioner_details'),
-
+    path('delete/<int:userId>', views.delete, name='delete'),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

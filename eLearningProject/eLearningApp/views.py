@@ -1,46 +1,49 @@
+from django.contrib.auth import logout, authenticate, login
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils import timezone
-from django.contrib.auth.decorators import login_required
-from .forms import UserForm, ExistingUserForm, RelatedCourseForm, CourseForm
-from django.contrib.auth.models import User
-from django.contrib.auth import login, logout, authenticate
+from django.http import HttpResponse
+from django.db.models import Q
+from django.core.files.storage import FileSystemStorage
+
+from .forms import LogInForm, UserForm, RelatedCourseForm, CourseForm
+from .models import role, user, Course, RelatedCourse
 from django.contrib import messages
-from .models import Subject, Course, RelatedCourse, Module, Content, ItemBase
+
+
 
 # Create your views here.
-#  the index view is the main page that the user sees with all of the entries
 def index(request):
-    context = {
-        'item': Course.objects.all()
-    }
-    return render(request, "eLearningApp/index.html", context)
+    return render(request, "eLearningApp/index.html")
 
 def dashboard(request):
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            # print(request.POST)
-            form = CourseForm(request.POST)
-            if form.is_valid():
-                tempFile = request.FILES
-                # print('if 1')
-            if not tempFile:
-                tempFile = ''
-                # print('if 2')
-            else:
-                print('else made it')
-                tempFile = tempFile['thumbnail']
-            entry = Course(title=request.POST['title'], info=request.POST['info'], docFile=tempFile,
-                           foreignKey=request.user)
-            entry.save()
+    context = {
+        "message": "Please Log in",
+        "error": False
+    }
+    if request.method == "POST":
+        try:
+            getUser = user.objects.get(username=request.POST['username'])
+            context['msg'] = getUser
+        except Exception as e:
+            context['message'] = "Wrong username" + str(e)
+            context['error'] = True
+            return render(request, 'logIn.html', context)
+        if getUser.user_password == request.POST['password']:
+            request.session['authenticated'] = True
+            request.session['user_id'] = getUser.user_id
+            request.session['user_level_id'] = getUser.user_level_id
+            request.session['user_first_name'] = getUser.user_first_name
             return redirect('dashboard')
-        image_list = Course.objects.all()
-        myEntries = Course.objects.filter(owner=request.user, created_date_lte=timezone.now()).order_by('-created_date')
-        context = {
-            'form': CourseForm,
-            'myEntries': myEntries,
-            'image_list': image_list,
-        }
-        return render(request, 'eLearningApp/landing.html', context)
+        else:
+            context['message'] = "Wrong Password"
+            context['error'] = True
+            return render(request, 'logIn.html', context)
+    else:
+        return render(request, 'logIn.html', context)
+
+
+def forgot(request):
+    return render(request, 'forgotpass.html')
+
 
 def edit(request, pkToEdit):
     item = get_object_or_404(Course, pk=pkToEdit)
@@ -50,9 +53,9 @@ def edit(request, pkToEdit):
     if request.POST:
         if form.is_valid():
             form.save()
-            return redirect('index')
+            return redirect('/')
     context = {
-        'item': item,
+        'course': Course,
         'form': form,
         'userForeignKey': userForeignKey.foreignKey.username,
         'currentUser': currentUser,
@@ -61,50 +64,66 @@ def edit(request, pkToEdit):
     return render(request, 'eLearningApp/edit.html', context)
 
 
-def delete(request, pkToDelete):
-    item = get_object_or_404(Course, pk=pkToDelete)
-    course_pk = item.post.pk
-    item.delete()
-    return redirect('dashboard', pk=course_pk)
-
-
 def logIn(request):
-    if request.method == 'POST':
-        returnUser = authenticate(username=request.POST['username'], password=request.POST['password'])
-        if returnUser is not None:
-            login(request, returnUser)
-            return redirect('index')
+    if request.method == "POST":
+        logged_in_user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        if logged_in_user is not None:
+            login(request, logged_in_user)
+            return render(request, 'eLearningApp/dashboard.html')
         else:
-            messages.error(request, 'Username or Password Incorrect, Please try again.')
+            messages.error(request, "Incorrect Username or Password")
             return redirect('logIn')
     context = {
-        'form': ExistingUserForm
+        "form": LogInForm
     }
     return render(request, "eLearningApp/logIn.html", context)
-
-
-def logOut(request):
-    logout(request)
-    return redirect('index')
 
 
 def signUp(request):
     if request.method == 'POST':
         newUser = UserForm(request.POST or None)
         if newUser.is_valid():
-            loggedInUser = User.objects.create_user(username=request.POST['username'], email='',
+            loggedInUser = user.objects.create_user(username=request.POST['username'],
                                                     password=request.POST['password'])
             login(request, loggedInUser)
-            return redirect('index')
+            return redirect('/')
         else:
             messages.error(request, "This user exists, new user name needed!")
             return redirect('signUp')
     else:
         context = {
             'form': UserForm(),
-
         }
-        return render(request, 'eLearningApp/signUp.html', context)
+        return render(request, 'eLearningApp/dashboard.html', context)
+
+
+def logOut(request):
+    logout(request)
+    return redirect('/')
+
+
+def delete(request, userId):
+    try:
+        deleteUser = user.objects.get(user_id = userId)
+        deleteUser.delete()
+    except Exception as e:
+        return HttpResponse('Something went wrong. Error Message : '+ str(e))
+    messages.add_message(request, messages.INFO, "User Deleted Successfully !!!")
+    return redirect('dashboard', user_id = userId)
+
+def search(request):
+    if request.method == "GET":
+        query = request.GET.get('q')
+        context = {
+            'list': Course.objects.filter(title__contains=query)}
+        return render(request, 'eLearningApp/search.html', context)
+
+def practitioner_details(request, pkToPerson):
+    person = user.objects.get(pk=pkToPerson)
+    person_details = {
+        'person': person,
+    }
+    return render(request, 'eLearningApp/user.html', person_details)
 
 def related_course(request, pkToRelated):
     if request.method == "POST":
@@ -116,7 +135,7 @@ def related_course(request, pkToRelated):
             else:
                 tempFiles = tempFiles["image"]
                 related = RelatedCourse.objects.select_related('entryName').prefetch_related('time').only(
-                'entryInfo', 'created_on', 'image')
+                    'entryInfo', 'created_on', 'image')
                 related.save()
         return redirect("dashboard")
     else:
@@ -124,27 +143,3 @@ def related_course(request, pkToRelated):
             'form': RelatedCourseForm()
         }
     return render(request, 'eLearningApp/related_course.html', context)
-
-
-def search(request):
-    if request.method == "GET":
-        query = request.GET.get('q')
-        context = {
-            'list': Course.objects.filter(entryName__contains=query)}
-        return render(request, 'eLearningApp/search.html', context)
-
-
-def course_detail(request, pkToShow):
-    item = Course.objects.get(pk=pkToShow)
-    displayInfo = {
-        'item': item,
-    }
-    return render(request, 'eLearningApp/course_detail.html', displayInfo)
-
-
-def practitioner_details(request, pkToPerson):
-    person: User.objects.get(pk=pkToPerson)
-    person_details = {
-        'person': person,
-    }
-    return render(request, 'eLearningApp/person_detail.html', person_details)

@@ -1,38 +1,134 @@
 {% extends 'eLearningApp/base.html' %}
 
 {% block content %}
-<h2>Courses:</h2>
-{% if user.is_authenticated %}
-<h4>Welcome {{user.username}}</h4>
-<a href="{% url 'dashboard' %}"><button>{{user.username}} Course Page </button></a>
-<a href="{% url 'logOut' %}"><button>Log Out</button></a>
+<!-- Sequence Modern Slider -->
+<div id="da-slider" class="da-slider" style="top:1px;">
 
+    <div class="da-slide">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        <i>MANAGE THE</i>
+                        <br>
+                        <i>Course</i>
+                        <br>
+                        <i>DETAILS</i>
+                    </h2>
+                    <p>
+                        <i>A complete solution</i>
+                        <br />
+                        <i>for course management</i>
+                    </p>
+                    <a href="#" class="btn btn-info btn-lg da-link">
+                        Read more
+                    </a>
+                    <div class="da-img">
+                        <img src="/media/parallax-slider/images/1.png" alt="image01" style="height:300px"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div id="post_loggedIn">
-    {% for each in item %}
-    <p><a href="{% url 'display' each.id %}">{{ each.entryName }}</a></p>
-    <p>{{ each.info }}</p>
-    <p>{{ each.created }}</p>
-    <p>{% if each.thumbnail %}<img src="{{each.thumbnail.url}}" width="200" height="200">{% endif %}</p>
-    {# <a href="{% url 'edit' each.id %}">Edit Item</a> #}
-    {# <a href="{% url 'delete' each.id %}">Delete Item</a> #}
-    {% endfor %}
+    <div class="da-slide">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>
+                        <i>ONLINE</i>
+                        </br>
+                        <i>E-LEARNING</i>
+                        </br>
+                        <i>PORTAL</i>
+                    </h2>
+                    <p>
+                        <i>A complete</i>
+                        <br />
+                        <i>solution for</i>
+                        <br />
+                        <i>managing e-learning</i>
+                    </p>
+                    <a href="#" class="btn btn-info btn-lg da-link">
+                        Read more
+                    </a>
+                    <div class="da-img">
+                        <img src="/media/parallax-slider/images/3.gif" alt="image01" style="height:300px"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="da-arrows">
+        <span class="da-arrows-prev">
+        </span>
+        <span class="da-arrows-next">
+        </span>
+    </nav>
 </div>
 
 
+<div class="container">
+    <div class="row mar-b-30">
+        <div class="col-md-12">
+            <div class="text-center feature-head wow fadeInDown">
+                <h1 class="" style="margin:30px;">
+                    Welcome to Online E-Learning Portal
+                </h1>
 
-{% else %}
-<a href="{% url 'signUp' %}" id="btn1"><button>Sign Up </button></a>
-<a href="{% url 'logIn' %}" id="btn2"><button>Log In </button></a>
+            </div>
+            <div class="col-md-4 col-sm-4 text-center wow fadeInUp">
+                <div class="feature-box-heading">
+                    <em>
+                        <img src="/assets/img/parallax-slider/images/front3.png" alt="" style="width:350px; height:180px;">
+                        </em>
+                        <h4>
+                            <b>Courses Management System</b>
+                        </h4>
+                    </div>
+                    <p class="text-center">
+                        A software application or set of related programs that are used to create and manage digital content.
+                    </p>
+                </div>
+            </div>
 
-<div id="post_notLogged">
-    {% for each in item %}
-    <li><a href="">{{ each.owner }}</a></li>
-    <li>{{ each.info }}</li>
-    <li>{{ each.created }}</li>
-    <li>{% if each.thumbnail %}<img src="{{each.thumbnail.url}}" width="200" height="200">{% endif %}</li>
-    {% endfor %}
-    {% endif %}
+            <!--feature end-->
+        </div>
+    </div>
 </div>
 
-{% endblock %}
+
+<!--property start-->
+<div class="property gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 text-center wow fadeInLeft">
+                <img src="/assets/img/p3.jpg" alt="" style="height:335px; width:550px;">
+            </div>
+            <div class="col-lg-6 col-sm-6 wow fadeInRight">
+                <h1>
+                    About Online E-Learning Portal
+                </h1>
+                <hr>
+                <p>
+                    Welcome! This course is offered by Christian Health Service Corps as part of our Medical Missions 101 initiative. Medical Missions 101 is an online community dedicated to educating, encouraging and engaging those who share our passion for medical missions. As a community we are pursuing best evidence-based practice in medical missions and global health; we invite you to join us.
+                </p>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+<!--property end-->
+<script type="text/javascript" src="/static/js/parallax-slider/jquery.cslider.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        $('#da-slider').cslider({
+            autoplay    : true,
+            bgincrement : 100
+        });
+
+    });
+</script>
+{% endblock content %}

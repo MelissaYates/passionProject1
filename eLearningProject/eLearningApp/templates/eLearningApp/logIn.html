@@ -3,22 +3,22 @@
 
 {% block content %}
 <div class = "jumbotron">
-<a href="{% url 'signUp' %}" id="btn1"><button>Sign Up </button></a>
-<a href="{% url 'logIn' %}" id="btn2"><button>Log in</button></a>
-<h1>
-    Login Page
-</h1>
-<br>
-<h3>Complete form below:</h3>
-{% for message in messages %}
-{{message}}
-{% endfor %}
-<form action="{% url 'logIn' %}" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" class="btn btn-primary" value="Login"/>
-    <input type="hidden" name="next" value="{{next}}"/>
+    <a href="{% url 'signUp' %}" id="btn1"><button>Sign Up </button></a>
+    <a href="{% url 'logIn' %}" id="btn2"><button>Log in</button></a>
+    <h1>
+        Login Page
+    </h1>
+    <br>
+    <h3>Complete form below:</h3>
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    <form action="{% url 'logIn' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" class="btn btn-primary" value="Login"/>
+        <input type="hidden" name="next" value="{{next}}"/>
 
-</form>
+    </form>
 </div>
 {% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'eLearningApp/base.html' %}
+{% block content %}
+<!--breadcrumbs start-->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-sm-4">
+				<h1>{{heading}}</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!--breadcrumbs end-->
+
+<!--container start-->
+<div class="registration-bg">
+	<div class="row">
+		<form enctype="multipart/form-data" method="post" class="form-signin wow fadeInUp" action="{% url 'logIn' %}" style="max-width:60%">
+			{% csrf_token %}
+			<h2 class="form-signin-heading">
+				{% if fn == "add" %}
+					Add {{sub_heading}}
+				{% elif fn == "update" %}
+					{{sub_heading}}
+				{% else %}
+					My Profile
+				{% endif %}
+			</h2>
+			{% if messages %}
+				<div class="alert alert-success fade in" style="margin:10px;">
+					{% for message in messages %}
+						<strong>{{ message }}</strong>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="login-wrap">
+				<div class="col-xs-6 form-group label-floating role-options">
+					<label class="control-label">Select User Role</label>
+					<div name="user_level_id" required class="form-control" placeholder="Select User Level">
+					<p>Please Select</p>
+					{% for role in rolelist %}
+						<p value="{{ role.role_id }}" {% ifequal role.role_id user.user_level_id %} selected="selected"{% endifequal %}>{{role.role_title}}</p>
+					{% endfor %}
+					</div>
+				</div>
+				<div class="clearfix"></div> 
+				<div style="font-size:18px; color: #000000; margin:20px 10px 30px 10px; border-bottom:1px solid #CCC">User Login Details</div>
+				<div class="col-xs-6 form-group">
+					<label for="user_first_name">User First Name</label>
+					<input type="text" class="form-control" placeholder="User First Name" name="user_first_name" id="user_first_name" value="{{first_name}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="user_last_name">User Last Name</label>
+					<input type="text" class="form-control" placeholder="User Last Name" name="user_last_name" id="user_last_name" value="{{last_name}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="user_username">Login ID</label>
+					<input type="text" class="form-control" placeholder="Username" name="user_username" id="user_username" value="{{username}}">
+				</div>
+				<div class="col-xs-6 form-group update-user">
+					<label for="user_password">Password</label>
+					<input type="password" class="form-control" placeholder="Password" name="user_password" id="user_password" value="{{password}}">
+				</div>
+				<div class="col-xs-6 form-group update-user">
+					<label for="user_confirm_password">Confirm Password</label>
+					<input type="password" class="form-control" placeholder="Confirm Password" name="user_confirm_password" id="user_confirm_password" value="{{password}}">
+				</div>
+				<div style="clear:both"></div>
+				<div style="font-size:18px; color: #000000; margin:10px 10px 30px 10px; border-bottom:1px solid #CCC">User Personal Details</div>
+				<div class="col-xs-6 form-group">
+					<label for="user_email">User Email</label>
+					<input type="text" class="form-control" placeholder="User Email" name="user_email" id="user_email" value="{{email}}">
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="user_image">User Picture</label>
+					<input type="file" accept="image/*" class="form-control" placeholder="User Mobile" name="user_image" id="user_image"
+					 value="{{image}}">
+					{% if image %}
+					<div class="clearfix" style="margin-top:20px;"><img src="{{image}}" style="width: 100px"></div><br>
+					{% endif %}
+				</div>
+				<button class="btn btn-lg btn-login btn-block" type="submit">Submit</button>
+			</div>
+			<input type="hidden" name="act" value="save_user">
+			<input type="hidden" name="avail_image" value="{{image}}">
+			<input type="hidden" name="user_id" value="{{user.id}}">
+		</form>
+	</div>
+</div>
+{% if userdetails %}
+<script>
+	$(".update-user").hide();
+</script>
+{% endif %}
+{% if request.session.user_level_id != 1 %}
+<script>
+	$(".role-options").hide();
+</script>
+{% endif %}
+<!--container end-->
+{% endblock content %}
