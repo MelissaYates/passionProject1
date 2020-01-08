@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import user, role, Course, RelatedCourse
+from .models import User, Role, Course, RelatedCourse
 
 # Register your models here.
 
 
-admin.site.register(user)
-admin.site.register(role)
+admin.site.register(User)
+admin.site.register(Role)
 admin.site.register(Course)
 admin.site.register(RelatedCourse)

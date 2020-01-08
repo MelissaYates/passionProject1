@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, Textarea
-from .models import Course, RelatedCourse, Subject, Module, user
+from .models import Course, RelatedCourse, Module, User
 
 
 # form for posts
@@ -14,13 +14,13 @@ class CourseForm(ModelForm):
 #form for user to singup and create profile for future access
 class UserForm(ModelForm):
     class Meta:
-        model = user
+        model = User
         fields = ["username", "password"]
 
 # form for user login/ authentication
 class LogInForm(ModelForm):
     class Meta:
-        model = user
+        model = User
         fields = ['username', 'password']
 
 # form for related items

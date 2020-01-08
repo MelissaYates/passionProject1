@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'taggit',
     'rest_framework',
     'eLearningApp',
     'django.contrib.admin',
