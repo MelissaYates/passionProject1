@@ -106,6 +106,7 @@ class ItemBase(models.Model):
                               on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     description=models.CharField(max_length=1000)
+    tags = TaggableManager()
     created = models.DateTimeField(default=timezone.now())
     updated = models.DateTimeField(default=timezone.now())
 

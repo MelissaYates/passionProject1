@@ -50,9 +50,6 @@
                     <a href="/course/list" class="btn btn-default btn-circle"><div>Course<br>Lists</div></a>	
                 </div><!--/.col-->
                 <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/question/result_view" class="btn btn-default btn-circle"><div>My<br>Results</div></a>	
-                </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
                     <a href="/users/update/{{ request.session.user_id }}/" class="btn btn-default btn-circle"><div>My<br>Account</div></a>	
                 </div><!--/.col-->
                 <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
@@ -73,7 +70,7 @@
         {% endfor %}
     </p>
     <div class="row mb-2 posts">
-        {% for post in posts %}
+        {% for course in courses %}
         <div class="col-md-6">
             <div class="cards">
                 <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
