@@ -61,7 +61,7 @@ class Course(models.Model): #A course is made of one or more modules packed toge
 
 class RelatedCourse(models.Model):
     entryName = models.CharField(max_length=50)
-    entryInfo = models.CharField(max_length=10000)
+    entryInfo = models.TextField(max_length=10000)
     time = models.DateTimeField(default=timezone.now())
     image = models.ImageField(upload_to='images', null=True, blank=True)
     relatedKey = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -105,7 +105,7 @@ class ItemBase(models.Model):
                               related_name='%(class)s_related',
                               on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
-    description=models.CharField(max_length=1000)
+    description=models.TextField(max_length=1000)
     tags = TaggableManager()
     created = models.DateTimeField(default=timezone.now())
     updated = models.DateTimeField(default=timezone.now())

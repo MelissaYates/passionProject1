@@ -61,15 +61,5 @@
         </form>
     </div>
 </div>
-{% if appointmentdetails %}
-<script>
-    $(".update-appointment").hide();
-</script>
-{% endif %}
-{% if request.session.appointment_level_id != 1 %}
-<script>
-    $(".role-options").hide();
-</script>
-{% endif %}
 <!--container end-->
 {% endblock content %}

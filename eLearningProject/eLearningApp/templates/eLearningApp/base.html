@@ -83,18 +83,17 @@
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">Administration <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{% url 'index' %}">Add Topics</a></li>
-                        <li><a href="/course/add">Add Course</a></li>
-                        <li><a href="/users/add">Add New User</a></li>
+                        <li><a href="add">Add Course</a></li>
+                        <li><a href="add_video">Add Video</a></li>
                     </ul>
                 </li>
                 {% elif request.session.user_level_id == 2 %}
-                <li><a href="/users/dashboard">Dashboard</a></li>
+                <li><a href="dashboard">Dashboard</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Administration <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/course/list">Course Lists</a></li>
+                        <li><a href="course_list">Course Lists</a></li>
                     </ul>
                 </li>
                 {% endif %}
@@ -102,8 +101,7 @@
                     <a class="dropdown-toggle" data-close-others="false" data-delay="0" data-hover="dropdown" data-toggle="dropdown" href="#">My Account <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/users/update/{{ request.session.user_id }}/">My Account</a></li>
-                        <li><a href="/users/changepassword">Change Password</a></li>
+                        <li><a href="{{ request.session.id }}/">My Account</a></li>
                     </ul>
                 </li>
                 <li><a href="{% url 'logIn' %}">Log In</a></li>
@@ -229,7 +227,7 @@
 
     $(window).load(function () {
             $('.flexslider').flexslider({
-                    animation: "slide", E Learning Portal
+                    animation: "slide", eLearningPortal
                     start: function (slider) {
                         $('body').removeClass('loading');
                     }
@@ -288,7 +286,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="https://use.fontawesome.com/6e68d9ab5a.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.0/jquery.flexslider.js"></script>
-<script src="/static/eLearningApp/owlcarousel/owl.carousel.js"></script>
+<script src="/static/eLearningApp/js/owl.carousel.js"></script>
 <script src="/static/eLearningApp/js/superfish.js"></script>
 
 

@@ -10,10 +10,11 @@ from django.contrib import messages
 from taggit.models import Tag
 
 
-
 # Create your views here.
+
 def index(request):
     return render(request, "eLearningApp/index.html")
+
 
 def dashboard(request):
     context = {
@@ -40,10 +41,6 @@ def dashboard(request):
             return render(request, 'logIn.html', context)
     else:
         return render(request, 'logIn.html', context)
-
-
-def forgot(request):
-    return render(request, 'forgotpass.html')
 
 
 def edit(request, pkToEdit):
@@ -114,6 +111,7 @@ def delete(request, userId):
     messages.add_message(request, messages.INFO, "User Deleted Successfully !!!")
     return redirect('dashboard', user_id = userId)
 
+
 def search(request):
     if request.method == "GET":
         query = request.GET.get('q')
@@ -121,12 +119,14 @@ def search(request):
             'list': Course.objects.filter(title__contains=query)}
         return render(request, 'eLearningApp/search.html', context)
 
+
 def practitioner_details(request, pkToPerson):
     person = User.objects.get(pk=pkToPerson)
     person_details = {
         'person': person,
     }
     return render(request, 'eLearningApp/user.html', person_details)
+
 
 def related_course(request, pkToRelated):
     if request.method == "POST":
@@ -147,6 +147,7 @@ def related_course(request, pkToRelated):
         }
     return render(request, 'eLearningApp/related_course.html', context)
 
+
 def tagged(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
     # Filter posts by tag name
@@ -155,4 +156,4 @@ def tagged(request, slug):
         'tag':tag,
         'courses':courses,
     }
-    return render(request, 'dashboard.html', context)
+    return render(request, 'course_list.html', context)
