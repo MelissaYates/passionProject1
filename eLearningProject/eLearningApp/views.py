@@ -41,7 +41,7 @@ def dashboard(request):
             context['error'] = True
             return render(request, 'logIn.html', context)
     else:
-        return render(request, 'logIn.html', context)
+        return render(request, 'dashboard.html', context)
 
 
 def edit(request, pkToEdit):
