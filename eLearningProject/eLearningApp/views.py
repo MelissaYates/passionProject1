@@ -34,7 +34,7 @@ def dashboard(request):
             request.session['user_id'] = getUser.user_id
             request.session['user_level_id'] = getUser.user_level_id
             request.session['first_name'] = getUser.user_first_name
-            return redirect('dashboard')
+            return redirect('dashboard.html')
         else:
             context['message'] = "Wrong Password"
             context['error'] = True
@@ -83,18 +83,20 @@ def signUp(request):
     if request.method == 'POST':
         newUser = UserForm(request.POST or None)
         if newUser.is_valid():
-            loggedInUser = User.objects.create_user(username=request.POST['username'],
+            loggedInUser = User.objects.create_user(username=request.POST['username'], email=request.POST['email'],
                                                     password=request.POST['password'])
             login(request, loggedInUser)
-            return redirect('/')
+            return redirect('index')
         else:
             messages.error(request, "This user exists, new user name needed!")
             return redirect('signUp')
     else:
         context = {
             'form': UserForm(),
+
         }
         return render(request, 'eLearningApp/signUp.html', context)
+
 
 
 def logOut(request):
