@@ -12,29 +12,16 @@
 </div>
 <div class="registration-bg">
 	<div class="container">
-        {% if request.session.user_level_id == 1 %}		
         <div class="container w">
             <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/topics/add" class="btn btn-default btn-circle"><div>Add<br>Topics</div></a>	
-                </div><!--/.col-->	
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/course/add" class="btn btn-default btn-circle"><div>Add<br>Course</div></a>	
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                    <a href="#" class="btn btn-default btn-circle"><div>Course<br>List</div></a>
                 </div><!--/.col-->
-
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/users/add" class="btn btn-default btn-circle"><div>Add<br>Users</div></a>	
-                </div><!--/.col-->		
-
-
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/users/update/{{ request.session.user_id }}/" class="btn btn-default btn-circle"><div>My<br>Account</div></a>	
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                    <a href="#" class="btn btn-default btn-circle"><div>Add<br>Users</div></a>
                 </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/users/changepassword" class="btn btn-default btn-circle"><div>Change<br>Password</div></a>	
-                </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/users/logout" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>	
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                    <a href="#" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>
                 </div><!--/.col-->
                 
             </div><!-- row -->				  
@@ -43,26 +30,7 @@
             <br>
         </div>
         {% endif %}
-        {% if request.session.user_level_id == 2 %}		
-        <div class="container w">
-            <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/course/list" class="btn btn-default btn-circle"><div>Course<br>Lists</div></a>	
-                </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/users/update/{{ request.session.user_id }}/" class="btn btn-default btn-circle"><div>My<br>Account</div></a>	
-                </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/users/changepassword" class="btn btn-default btn-circle"><div>Change<br>Password</div></a>	
-                </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="/users/logout" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>	
-                </div><!--/.col-->				
-            </div><!-- row -->
-            <br>
-            <br>
-        </div>
-        {% endif %}
+
     </div>
     <p>Common Tags:
         {% for mt in common_tags %}
@@ -82,7 +50,7 @@
                             {% endfor %}
                         </div>
                         <p class="mb-auto">{{course.description}}</p>
-                        <p class="mb-auto text-muted">{{course.published}}</p>
+                        <p class="mb-auto text-muted">{{course.created}}</p>
                     </div>
                 </div>
             </div>

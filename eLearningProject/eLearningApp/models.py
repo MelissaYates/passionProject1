@@ -7,13 +7,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from .fields import OrderField
 from taggit.managers import TaggableManager
-from django.contrib.auth.models import AbstractBaseUser, UserManager
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 
 
 class CourseUser(models.Model):
+    django_user=models.OneToOneField(User, on_delete=models.CASCADE)
     user_level_id = models.CharField(max_length=255, default = '2')
     username = models.CharField(max_length=255, default = "", unique=True)
     password = models.CharField(max_length=20, default = "")

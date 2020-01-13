@@ -1,4 +1,5 @@
 from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.db.models import Q
@@ -86,11 +87,13 @@ def signUp(request):
         print("Hello")
         if newUser.is_valid():
             print("Debug")
-            loggedInUser = CourseUser.objects.create_user(username=request.POST['username'],
-                                                          password=request.POST['password'])
+            tempUser = User.objects.create_user(username=request.POST['username'],
+                                                password=request.POST['password'])
+            CourseUser.objects.create(django_user=tempUser)
+            tempUser.save()
             print("next line")
-            login(request, loggedInUser)
-            return redirect('index')
+            login(request, tempUser)
+            return redirect('dashboard')
         else:
             print("sign up issue")
             messages.error(request, "This user exists, new user name needed!")
@@ -101,7 +104,6 @@ def signUp(request):
 
         }
         return render(request, 'eLearningApp/signUp.html', context)
-
 
 
 def logOut(request):
