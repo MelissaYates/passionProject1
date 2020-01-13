@@ -10,7 +10,9 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100" src="/media/eLearningApp/p3.jpg" alt="image01" style="height:300px">
+            {% load static %}
+            <img class="d-block w-100" src="{% static 'eLearningApp/images/p3.jpg' %}" alt="image01" style="height:300px">
+            {# <img class="d-block w-100" src="/media/eLearningApp/p3.jpg" alt="image01" style="height:300px"> #}
             <div class="carousel-caption d-none d-md-block">
                 <h5> <i>Course</i>
                     <br>
