@@ -7,12 +7,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
 from .fields import OrderField
 from taggit.managers import TaggableManager
+from django.contrib.auth.models import AbstractBaseUser, UserManager
 
 
 # Create your models here.
 
 
-class User(models.Model):
+class CourseUser(models.Model):
     user_level_id = models.CharField(max_length=255, default = '2')
     username = models.CharField(max_length=255, default = "", unique=True)
     password = models.CharField(max_length=20, default = "")
@@ -23,13 +24,14 @@ class User(models.Model):
     add2 = models.TextField(default = "")
     image = models.CharField(max_length=255, null = True)
 
+
     def __str__(self):
         return self.first_name
 
 
 class Role(models.Model):
-    role_type=models.ForeignKey(User,
-                                related_name='users',on_delete=CASCADE)
+    role_type=models.ForeignKey(CourseUser,
+                                related_name='users', on_delete=CASCADE)
     role_title = models.CharField(max_length=255, default = "")
     role_description = models.TextField(default = "")
 
@@ -101,7 +103,7 @@ class Content(models.Model):
 
 
 class ItemBase(models.Model):
-    owner = models.ForeignKey(User,
+    owner = models.ForeignKey(CourseUser,
                               related_name='%(class)s_related',
                               on_delete=models.CASCADE)
     title = models.CharField(max_length=250)

@@ -18914,7 +18914,7 @@ user:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User
+  label: CourseUser
   search:
     terms:
       - account
@@ -18934,7 +18934,7 @@ user-alt:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Alternate User
+  label: Alternate CourseUser
   search:
     terms:
       - account
@@ -18951,7 +18951,7 @@ user-alt:
 user-alt-slash:
   changes:
     - 5.0.11
-  label: Alternate User Slash
+  label: Alternate CourseUser Slash
   search:
     terms:
       - account
@@ -18968,7 +18968,7 @@ user-alt-slash:
 user-astronaut:
   changes:
     - 5.0.11
-  label: User Astronaut
+  label: CourseUser Astronaut
   search:
     terms:
       - avatar
@@ -18984,7 +18984,7 @@ user-astronaut:
 user-check:
   changes:
     - 5.0.11
-  label: User Check
+  label: CourseUser Check
   search:
     terms:
       - accept
@@ -19001,7 +19001,7 @@ user-circle:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User Circle
+  label: CourseUser Circle
   search:
     terms:
       - account
@@ -19019,7 +19019,7 @@ user-circle:
 user-clock:
   changes:
     - 5.0.11
-  label: User Clock
+  label: CourseUser Clock
   search:
     terms:
       - alert
@@ -19033,7 +19033,7 @@ user-clock:
 user-cog:
   changes:
     - 5.0.11
-  label: User Cog
+  label: CourseUser Cog
   search:
     terms:
       - admin
@@ -19047,7 +19047,7 @@ user-cog:
 user-edit:
   changes:
     - 5.0.11
-  label: User Edit
+  label: CourseUser Edit
   search:
     terms:
       - edit
@@ -19063,7 +19063,7 @@ user-edit:
 user-friends:
   changes:
     - 5.0.11
-  label: User Friends
+  label: CourseUser Friends
   search:
     terms:
       - group
@@ -19078,7 +19078,7 @@ user-friends:
 user-graduate:
   changes:
     - 5.0.11
-  label: User Graduate
+  label: CourseUser Graduate
   search:
     terms:
       - cap
@@ -19095,7 +19095,7 @@ user-graduate:
 user-injured:
   changes:
     - 5.4.0
-  label: User Injured
+  label: CourseUser Injured
   search:
     terms:
       - cast
@@ -19112,7 +19112,7 @@ user-lock:
   changes:
     - 5.0.11
     - 5.9.0
-  label: User Lock
+  label: CourseUser Lock
   search:
     terms:
       - admin
@@ -19148,7 +19148,7 @@ user-md:
 user-minus:
   changes:
     - 5.0.11
-  label: User Minus
+  label: CourseUser Minus
   search:
     terms:
       - delete
@@ -19161,7 +19161,7 @@ user-minus:
 user-ninja:
   changes:
     - 5.0.11
-  label: User Ninja
+  label: CourseUser Ninja
   search:
     terms:
       - assassin
@@ -19193,7 +19193,7 @@ user-plus:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User Plus
+  label: CourseUser Plus
   search:
     terms:
       - add
@@ -19212,7 +19212,7 @@ user-secret:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: User Secret
+  label: CourseUser Secret
   search:
     terms:
       - clothing
@@ -19230,7 +19230,7 @@ user-secret:
 user-shield:
   changes:
     - 5.0.11
-  label: User Shield
+  label: CourseUser Shield
   search:
     terms:
       - admin
@@ -19245,7 +19245,7 @@ user-shield:
 user-slash:
   changes:
     - 5.0.11
-  label: User Slash
+  label: CourseUser Slash
   search:
     terms:
       - ban
@@ -19258,7 +19258,7 @@ user-slash:
 user-tag:
   changes:
     - 5.0.11
-  label: User Tag
+  label: CourseUser Tag
   search:
     terms:
       - avatar
@@ -19274,7 +19274,7 @@ user-tag:
 user-tie:
   changes:
     - 5.0.11
-  label: User Tie
+  label: CourseUser Tie
   search:
     terms:
       - avatar
@@ -19293,7 +19293,7 @@ user-times:
     - 5.0.0
     - 5.0.3
     - 5.0.11
-  label: Remove User
+  label: Remove CourseUser
   search:
     terms:
       - archive

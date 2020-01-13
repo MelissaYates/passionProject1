@@ -4389,7 +4389,7 @@
                     returnValue = mixer.config.callbacks.onMixClick.call(mixer.lastClicked, mixer.state, e, mixer);
 
                     if (returnValue === false) {
-                        // User has returned `false` from the callback, so do not handle click
+                        // CourseUser has returned `false` from the callback, so do not handle click
 
                         continue;
                     }
@@ -7094,7 +7094,7 @@
                 h.addClass(self.dom.container, h.getClassname(self.config.classNames, 'container', self.config.classNames.modifierFailed));
             }
 
-            // User-defined callback function
+            // CourseUser-defined callback function
 
             if (typeof self.userCallback === 'function') {
                 self.userCallback.call(self.dom.container, self.state, self);

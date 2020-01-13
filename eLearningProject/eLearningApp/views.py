@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 
 from .forms import LogInForm, UserForm, RelatedCourseForm, CourseForm
-from .models import Role, Course, RelatedCourse, User
+from .models import Role, Course, RelatedCourse, CourseUser
 from django.contrib import messages
 from taggit.models import Tag
 
@@ -23,7 +23,7 @@ def dashboard(request):
     }
     if request.method == "POST":
         try:
-            getUser = User.objects.get(username=request.POST['username'])
+            getUser = CourseUser.objects.get(username=request.POST['username'])
             context['msg'] = getUser
         except Exception as e:
             context['message'] = "Wrong username" + str(e)
@@ -80,14 +80,19 @@ def logIn(request):
 
 
 def signUp(request):
+    print("Work")
     if request.method == 'POST':
         newUser = UserForm(request.POST or None)
+        print("Hello")
         if newUser.is_valid():
-            loggedInUser = User.objects.create_user(username=request.POST['username'], email=request.POST['email'],
-                                                    password=request.POST['password'])
+            print("Debug")
+            loggedInUser = CourseUser.objects.create_user(username=request.POST['username'],
+                                                          password=request.POST['password'])
+            print("next line")
             login(request, loggedInUser)
             return redirect('index')
         else:
+            print("sign up issue")
             messages.error(request, "This user exists, new user name needed!")
             return redirect('signUp')
     else:
@@ -106,11 +111,11 @@ def logOut(request):
 
 def delete(request, userId):
     try:
-        deleteUser = User.objects.get(user_id = userId)
+        deleteUser = CourseUser.objects.get(user_id = userId)
         deleteUser.delete()
     except Exception as e:
         return HttpResponse('Something went wrong. Error Message : '+ str(e))
-    messages.add_message(request, messages.INFO, "User Deleted Successfully !!!")
+    messages.add_message(request, messages.INFO, "CourseUser Deleted Successfully !!!")
     return redirect('dashboard', user_id = userId)
 
 
@@ -123,7 +128,7 @@ def search(request):
 
 
 def practitioner_details(request, pkToPerson):
-    person = User.objects.get(pk=pkToPerson)
+    person = CourseUser.objects.get(pk=pkToPerson)
     person_details = {
         'person': person,
     }

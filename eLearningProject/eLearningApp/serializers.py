@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import User, Subject, Course, RelatedCourse, Module, Content, ItemBase, Text, File, Image, Video
+from .models import CourseUser, Subject, Course, RelatedCourse, Module, Content, ItemBase, Text, File, Image, Video
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = CourseUser
         fields = "__all__"
 
 

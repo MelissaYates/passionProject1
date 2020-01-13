@@ -1,10 +1,10 @@
 from rest_framework import viewsets
-from .models import User, Subject, Course, RelatedCourse, Module, Content, ItemBase, Text, File, Image, Video
+from .models import CourseUser, Subject, Course, RelatedCourse, Module, Content, ItemBase, Text, File, Image, Video
 from .serializers import UserSerializer, SubjectSerializer, CourseSerializer, RelatedCourseSerializer, ModuleSerializer, ContentSerializer, ItemBaseSerializer, TextSerializer, FileSerializer, ImageSerializer, VideoSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = CourseUser.objects.all()
     serializer_class = UserSerializer
 
 class SubjectViewSet(viewsets.ModelViewSet):
