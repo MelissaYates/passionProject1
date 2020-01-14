@@ -61,7 +61,7 @@ def edit(request, pkToEdit):
     if request.POST:
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect('dashboard')
     context = {
         'course': Course,
         'common_tags':common_tags,
