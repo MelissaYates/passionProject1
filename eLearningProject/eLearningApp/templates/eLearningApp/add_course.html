@@ -1,0 +1,22 @@
+{% extends 'eLearningApp/base.html' %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<h4>Welcome {{user.username}}</h4>
+<a href="{% url 'index' %}"><button>Home</button></a>
+<a href="{% url 'logOut' %}"><button>Log Out</button></a>
+<h2>Create New Course:</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>Submit</button>
+</form>
+
+{% else %}
+<a href="{% url 'logIn' %}" id="btn2"><button>Log in</button></a>
+
+{% endif %}
+
+{% endblock %}

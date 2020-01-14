@@ -35,13 +35,21 @@ def dashboard(request):
             request.session['user_id'] = getUser.user_id
             request.session['user_level_id'] = getUser.user_level_id
             request.session['first_name'] = getUser.user_first_name
-            return redirect('dashboard.html')
+            return redirect('dashboard')
         else:
             context['message'] = "Wrong Password"
             context['error'] = True
-            return render(request, 'logIn.html', context)
+            return render(request, 'logIn', context)
     else:
-        return render(request, 'dashboard.html', context)
+        return render(request, 'dashboard', context)
+
+
+def course_listing(request, userId):
+    item = Course.objects.get(pk=userId)
+    displayInfo = {
+        'item': item,
+    }
+    return render(request, 'eLearningApp/course_list.html', displayInfo)
 
 
 def edit(request, pkToEdit):
@@ -166,3 +174,24 @@ def tagged(request, slug):
         'courses':courses,
     }
     return render(request, 'course_list.html', context)
+
+#allows instructor to add a new entry
+def add_course(request):
+    if request.method == "POST":
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            tempImageFile = request.FILES
+            if not tempImageFile:
+                tempImageFile = ''
+            else:
+                tempImageFile = tempImageFile['image']
+            new_course = Course(title=request.POST['title'], slug=request.POST['slug'], image=tempImageFile, overview=request.POST['overview'],
+                                info=request.POST['info'], author=request.user, tags=request.POST['tags'])
+            new_course.save()
+        return redirect('dashboard')
+
+    context = {
+        'form': CourseForm(),
+
+    }
+    return render(request, 'eLearningApp/add_course.html', context)

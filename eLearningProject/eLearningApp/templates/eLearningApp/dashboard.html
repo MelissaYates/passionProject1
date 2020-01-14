@@ -16,15 +16,13 @@
             <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
                     <a href="#" class="btn btn-default btn-circle"><div>Course<br>List</div></a>
+                   {# {% url 'course_listing' id %} #}
                 </div><!--/.col-->
                 <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-                    <a href="#" class="btn btn-default btn-circle"><div>Course<br>Details</div></a>
+                    <a href="{% url 'add_course' %}" class="btn btn-default btn-circle"><div>Add<br>Courses</div></a>
                 </div><!--/.col-->
                 <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-                    <a href="#" class="btn btn-default btn-circle"><div>Add<br>Courses</div></a>
-                </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
-                    <a href="#" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>
+                    <a href="{% url 'logOut'%}" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>
                 </div><!--/.col-->
                 
             </div><!-- row -->				  
