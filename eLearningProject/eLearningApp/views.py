@@ -20,7 +20,7 @@ def index(request):
 def dashboard(request):
     context = {
         "message": "Please Log in",
-        "error": False
+        "error": False,
     }
     if request.method == "POST":
         try:
@@ -44,8 +44,8 @@ def dashboard(request):
         return render(request, 'dashboard', context)
 
 
-def course_listing(request, userId):
-    item = Course.objects.get(pk=userId)
+def course_listing(request):
+    item = Course.objects.all()
     displayInfo = {
         'item': item,
     }
@@ -188,7 +188,7 @@ def add_course(request):
             new_course = Course(title=request.POST['title'], slug=request.POST['slug'], image=tempImageFile, overview=request.POST['overview'],
                                 info=request.POST['info'], author=request.user, tags=request.POST['tags'])
             new_course.save()
-        return redirect('dashboard')
+        return redirect('course_listing') # return render(request, "eLearningApp/course_list.html", context) #TODO come back and and context list of course not rendering.
 
     context = {
         'form': CourseForm(),
