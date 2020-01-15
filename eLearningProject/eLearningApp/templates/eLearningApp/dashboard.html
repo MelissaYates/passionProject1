@@ -1,6 +1,7 @@
 {% extends 'eLearningApp/base.html' %}
 {% block content %}
 <!--breadcrumbs start-->
+<section>
 <div class="breadcrumbs">
 	<div class="container">
 		<div class="row">
@@ -14,20 +15,32 @@
 <div class="registration-bg">
 	<div class="container">
         <div class="container w">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="{% url 'course_listing' %}" class="btn btn-default btn-circle"><div>Course<br>List</div></a>
-                   {# {% url 'course_listing' id %} #}
+                    <a href="{% url 'course_listing' %}" class="btn btn-default btn-circle btn-xl"><div>Course<br>List</div></a>
+
                 </div><!--/.col-->
                 <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="{% url 'add_course' %}" class="btn btn-default btn-circle"><div>Add<br>Courses</div></a>
-                </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
-                    <a href="{% url 'logOut'%}" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>
+                    <a href="{% url 'add_course' %}" class="btn btn-default btn-circle btn-xl"><div>Add<br>Courses</div></a>
                 </div><!--/.col-->
                 
             </div><!-- row -->				  
     
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <br>
             <br>
         </div>
@@ -35,4 +48,6 @@
     </div>
 
 </div>
+</section>
+
 {% endblock content %}
