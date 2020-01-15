@@ -2,8 +2,6 @@
 
 
 {% block content %}
-<a href="{% url 'signUp' %}" id="btn1"><button>Sign Up </button></a>
-<a href="{% url 'logIn' %}" id="btn2"><button>Log in</button></a>
 <h1>
     New CourseUser Sign Up
 </h1>
@@ -20,7 +18,7 @@
 </form>
 <br>
 <br>
-<a href="{%url 'dashboard'%}">Home</a>
+<a href="{% url 'dashboard' %}">Dashboard</a>
 <br>
 <br>
 {% endblock %}

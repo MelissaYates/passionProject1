@@ -41,7 +41,7 @@ def dashboard(request):
             context['error'] = True
             return render(request, 'logIn', context)
     else:
-        return render(request, 'dashboard', context)
+        return render(request, 'eLearningApp/dashboard.html', context)
 
 #following function not working
 def course_listing(request):

@@ -11,19 +11,18 @@
 	</div>
 </div>
 
-#TODO:enlarge the buttons that surround the Course List and Add Course
 <div class="registration-bg">
 	<div class="container">
         <div class="container w">
             <div class="row">
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
                     <a href="{% url 'course_listing' %}" class="btn btn-default btn-circle"><div>Course<br>List</div></a>
                    {# {% url 'course_listing' id %} #}
                 </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
                     <a href="{% url 'add_course' %}" class="btn btn-default btn-circle"><div>Add<br>Courses</div></a>
                 </div><!--/.col-->
-                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12">
+                <div class="col-lg-2 col-md-3 col-sm-12 col-xs-12 mydash">
                     <a href="{% url 'logOut'%}" class="btn btn-default btn-circle" style="padding-top:13px;"><div>Logout</div></a>
                 </div><!--/.col-->
                 
@@ -34,30 +33,6 @@
         </div>
 
     </div>
-    <p>Common Tags:
-        {% for mt in common_tags %}
-        <a href="#" class="badge badge-success">{{mt}}</a>
-        {% endfor %}
-    </p>
-    <div class="row mb-2 posts">
-        {% for course in courses %}
-        <div class="col-md-6">
-            <div class="cards">
-                <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
-                    <div class="col p-4 d-flex flex-column position-static">
-                        <h3 class="my-1"><a href="{% url 'detail' course.slug %}">{{course.title}}</a></h3>
-                        <div style="display:flex">
-                            {% for tag in course.tags.all %}
-                            <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
-                            {% endfor %}
-                        </div>
-                        <p class="mb-auto">{{course.description}}</p>
-                        <p class="mb-auto text-muted">{{course.created}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-</div>
+
 </div>
 {% endblock content %}
