@@ -43,32 +43,27 @@ def dashboard(request):
     else:
         return render(request, 'dashboard', context)
 
-
+#following function not working
 def course_listing(request):
-    item = Course.objects.all()
+    courseList = Course.objects.all()
     displayInfo = {
-        'item': item,
+        'courseList': courseList,
     }
     return render(request, 'eLearningApp/course_list.html', displayInfo)
 
-
+#make sure this code works
 def edit(request, pkToEdit):
     item = get_object_or_404(Course, pk=pkToEdit)
     form = CourseForm(request.POST or None, instance=item)
-    currentUser = request.user
-    userForeignKey = Course.objects.get(pk=pkToEdit)
-    common_tags = Course.tags.most_common()[:4]
     if request.POST:
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('details', pkToEdit)
     context = {
         'course': Course,
-        'common_tags':common_tags,
         'form': form,
-        'userForeignKey': userForeignKey.foreignKey.username,
-        'currentUser': currentUser,
         'usersPost': Course.objects.all(),
+        'pk':pkToEdit
     }
     return render(request, 'eLearningApp/edit.html', context)
 
@@ -119,14 +114,10 @@ def logOut(request):
     return redirect('/')
 
 
-def delete(request, userId):
-    try:
-        deleteUser = CourseUser.objects.get(user_id = userId)
-        deleteUser.delete()
-    except Exception as e:
-        return HttpResponse('Something went wrong. Error Message : '+ str(e))
-    messages.add_message(request, messages.INFO, "CourseUser Deleted Successfully !!!")
-    return redirect('dashboard', user_id = userId)
+def delete(request, pkToDelete):
+    entry = get_object_or_404(Course, pk = pkToDelete)
+    entry.delete()
+    return redirect('course_listing', pkToDelete)
 
 
 def search(request):
@@ -184,7 +175,7 @@ def add_course(request):
             if not tempImageFile:
                 tempImageFile = ''
             else:
-                tempImageFile = tempImageFile['image']
+                tempImageFile = tempImageFile['thumbnail']
             new_course = Course(title=request.POST['title'], slug=request.POST['slug'], image=tempImageFile, overview=request.POST['overview'],
                                 info=request.POST['info'], author=request.user, tags=request.POST['tags'])
             new_course.save()
@@ -195,3 +186,13 @@ def add_course(request):
 
     }
     return render(request, 'eLearningApp/add_course.html', context)
+
+def details(request,pk):
+    course = Course.objects.get(pk=pk)
+    relatedEntries_list = RelatedCourse.objects.filter(relatedKey = course)
+    context = {
+        'course': course,
+        'allRelatedEntries':relatedEntries_list,
+        'pk': request.user.pk
+    }
+    return render(request,'eLearningApp/course_detail.html',context)

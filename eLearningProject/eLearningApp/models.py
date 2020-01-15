@@ -45,10 +45,11 @@ class Course(models.Model): #A course is made of one or more modules packed toge
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     tags = TaggableManager()
-    overview = models.TextField()
-    info = models.CharField(max_length=10000)
+    overview = models.CharField(max_length=10000)
+    info = models.TextField()
     created = models.DateTimeField(default=timezone.now())
-    thumbnail = models.FileField()
+    updated=models.DateTimeField(default=timezone.now())
+    thumbnail = models.ImageField(upload_to="images")
 
     class Meta:
         ordering = ('-created',)

@@ -16,8 +16,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-sm-4">
+                {% load static %}
                 <h1>
-                    {{ heading }}
+                    Course Details
                 </h1>
             </div>
         </div>
@@ -41,14 +42,17 @@
                     <table class="table table-striped table-advance table-hover" style="color:#000000">
                         <tbody>
                         <tr class="bg-primary">
-                            <th style="background-color:#152c3f; color:#FFFFFF;">Course Name</th>
-                            <th style="background-color:#152c3f; color:#FFFFFF;">Course Description</th>
+                            <th style="background-color:#152c3f; color:#FFFFFF;">Course Title</th>
+                            <th style="background-color:#152c3f; color:#FFFFFF;">Course Overview</th>
+                            <th style="background-color:#152c3f; color:#FFFFFF;">Course Info</th>
+                            <th style="background-color:#152c3f; color:#FFFFFF;">Thumbnail</th>
+                            <th style="background-color:#152c3f; color:#FFFFFF;">Action</th>
                         </tr>
-                        {% for course in course_list %}
                         <tr>
                             <td>{{course.title}}</td>
+                            <td>{{course.overview}}</td>
                             <td>{{course.info}}</td>
-                            <td>{{course.thumbnail}}</td>
+                            <td><img src="{{course.thumbnail.url}}" alt=""/></td>
                             <td>
                                 <div class="btn-group">
                                     <a href="{% url 'edit' course.id %}" class="btn btn-success">Edit</a>
@@ -56,13 +60,14 @@
                                 </div>
                             </td>
                         </tr>
-                        {% endfor %}
                         </tbody>
                     </table>
                 </section>
                 <input type="hidden" name="act" />
                 <input type="hidden" name="medicine_id" id="recordID" />
             </form>
+
+
         </div>
     </div>
 </div>

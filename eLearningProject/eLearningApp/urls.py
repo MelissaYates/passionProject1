@@ -8,12 +8,13 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('add_course/', views.add_course, name='add_course'),
     path('course_listing/', views.course_listing, name='course_listing'),
+    path('details/<int:pk>/', views.details, name='details'),
     path('edit/<int:pkToEdit>/', views.edit, name='edit'),
     path('logIn/', views.logIn, name='logIn'),
     path('logOut/', views.logOut, name='logOut'),
     path('signUp/', views.signUp, name='signUp'),
     path('search/', views.search, name='search'),
-    path('delete/<int:userId>', views.delete, name='delete'),
+    path('delete/<int:pkToDelete>', views.delete, name='delete'),
 ]
 
 
