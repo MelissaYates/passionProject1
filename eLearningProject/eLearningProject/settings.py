@@ -28,7 +28,7 @@ SECRET_KEY = '1b35h%5g-pa59tq-lbcuf4zcjmnhx@1c^rk!(eqam2_g-^e%ri'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['167.99.104.133', 'app3.melissamyates.com', '127.0.0.1']
 
 
 # Application definition
